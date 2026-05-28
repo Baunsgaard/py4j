@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>2. Getting Started with Py4J &mdash; Py4J</title>
     <link rel="stylesheet" href="_static/py4jdoc.css" type="text/css" />
@@ -21,7 +21,9 @@
     <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -112,13 +114,13 @@
           <div class="body">
             
   <section id="getting-started-with-py4j">
-<h1><span class="section-number">2. </span>Getting Started with Py4J<a class="headerlink" href="#getting-started-with-py4j" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Getting Started with Py4J<a class="headerlink" href="#getting-started-with-py4j" title="Permalink to this heading">¶</a></h1>
 <p>This short tutorial assumes that you have already <a class="reference internal" href="install.html#install-instructions"><span class="std std-ref">installed</span></a> Py4J and that you are using the latest version. In this
 tutorial, you will write a simple Stack class in Java and then, you will write
 a Python program that accesses the stack.</p>
 <p>You will also see how Java lists can be manipulated as Python lists.</p>
 <section id="writing-the-java-program">
-<h2><span class="section-number">2.1. </span>Writing the Java Program<a class="headerlink" href="#writing-the-java-program" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Writing the Java Program<a class="headerlink" href="#writing-the-java-program" title="Permalink to this heading">¶</a></h2>
 <p>The first step is to write a short Java program. Here you will create a Stack
 class that offers two basic services and two advanced services:</p>
 <ol class="arabic simple">
@@ -128,32 +130,32 @@ class that offers two basic services and two advanced services:</p>
 <li><p>Push all elements contained in a list.</p></li>
 </ol>
 <p>Here is the code of the stack:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">py4j.examples</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">py4j.examples</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.LinkedList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.LinkedList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Stack</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">internalList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Stack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">internalList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">element</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">internalList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">element</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">element</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">internalList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">element</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">pop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">internalList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">pop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">internalList</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getInternalList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">internalList</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getInternalList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">internalList</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">element</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">element</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>To make the stack available to a Python program, you need something that will
@@ -174,50 +176,50 @@ you. The <code class="docutils literal notranslate"><span class="pre">GatewaySer
 parameter.</p>
 <p>Here is an example of an entry point that would allow a Python
 program to access a pre-configured stack:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">py4j.examples</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">py4j.examples</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">py4j.GatewayServer</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">py4j.GatewayServer</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StackEntryPoint</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StackEntryPoint</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">StackEntryPoint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="s">&quot;Initial Item&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">StackEntryPoint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span>
+<span class="w">      </span><span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="s">&quot;Initial Item&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="nf">getStack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="nf">getStack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">gatewayServer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Gateway Server Started&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span>
+<span class="w">        </span><span class="n">gatewayServer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Gateway Server Started&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>There are a few important lines in this code. First, you declare a class that
 will provide an access to a pre-configured stack:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="nf">getStack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="nf">getStack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Then, you create a main method. This main method could be located in another
 class. The first thing you do in the main method is to initialize a
 <a class="reference external" href="_static/javadoc/index.html?py4j/GatewayServer.html">GatewayServer</a> and link
 it to an entry point.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>Finally, you need to start the gateway so it can accept incoming Python
 requests:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">gatewayServer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">gatewayServer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>You are now ready to try your Java program. Just execute the StackGateway class
@@ -230,15 +232,15 @@ in your favorite development environment and check that you see the message
 are already running another instance of your program or another program on
 your computer is listening to the port 25333. To change the port, replace
 this line:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>by this line (use any port number):</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">(),</span><span class="w"> </span><span class="mi">25335</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">gatewayServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StackEntryPoint</span><span class="p">(),</span><span class="w"> </span><span class="mi">25335</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Do not forget to also change the Python code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">py4j.java_gateway</span> <span class="kn">import</span> <span class="n">JavaGateway</span><span class="p">,</span> <span class="n">GatewayParameters</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaGateway</span><span class="p">,</span> <span class="n">GatewayParameters</span>
 
 <span class="n">gateway</span> <span class="o">=</span> <span class="n">JavaGateway</span><span class="p">(</span><span class="n">gateway_parameters</span><span class="o">=</span><span class="n">GatewayParameters</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">25335</span><span class="p">))</span>
 </pre></div>
@@ -250,11 +252,11 @@ initialize the GatewayServer in another method, you can also call
 <code class="docutils literal notranslate"><span class="pre">gatewayServer.shutdown()</span></code>.</p>
 </section>
 <section id="writing-the-python-program">
-<h2><span class="section-number">2.2. </span>Writing the Python Program<a class="headerlink" href="#writing-the-python-program" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Writing the Python Program<a class="headerlink" href="#writing-the-python-program" title="Permalink to this heading">¶</a></h2>
 <p>You will now write the python program that will access your Java program. Start
 a Python interpreter and make sure that Py4J is in your PYTHONPATH.</p>
 <p>The first step is to import the necessary Py4J class:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">py4j.java_gateway</span> <span class="kn">import</span> <span class="n">JavaGateway</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaGateway</span>
 </pre></div>
 </div>
 <p>Next, initialize a <a class="reference internal" href="py4j_java_gateway.html#api-javagateway"><span class="std std-ref">JavaGateway</span></a>. The default parameters
@@ -292,25 +294,25 @@ it again.</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;py4j/java_gateway.py&quot;</span>, line <span class="m">346</span>, in <span class="n">__call__</span>
-    <span class="n">return_value</span> <span class="o">=</span> <span class="n">get_return_value</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gateway_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="n">return_value</span> <span class="o">=</span> <span class="n">get_return_value</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gateway_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
   File <span class="nb">&quot;py4j/java_gateway.py&quot;</span>, line <span class="m">228</span>, in <span class="n">get_return_value</span>
-    <span class="k">raise</span> <span class="n">Py4JJavaError</span><span class="p">(</span><span class="s1">&#39;An error occurred while calling </span><span class="si">%s%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target_id</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+<span class="w">    </span><span class="k">raise</span> <span class="n">Py4JJavaError</span><span class="p">(</span><span class="s1">&#39;An error occurred while calling </span><span class="si">%s%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target_id</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 <span class="gr">py4j.java_gateway.Py4JJavaError</span>: <span class="n">An error occurred while calling o0.pop.</span>
-<span class="go">java.lang.IndexOutOfBoundsException: Index: 0, Size: 0</span>
-<span class="go">    at java.util.LinkedList.entry(LinkedList.java:382)</span>
-<span class="go">    at java.util.LinkedList.remove(LinkedList.java:374)</span>
-<span class="go">    at py4j.examples.Stack.pop(Stack.java:42)</span>
-<span class="go">    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span>
-<span class="go">    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)</span>
-<span class="go">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span>
-<span class="go">    at java.lang.reflect.Method.invoke(Method.java:616)</span>
-<span class="go">    at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:119)</span>
-<span class="go">    at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:392)</span>
-<span class="go">    at py4j.Gateway.invoke(Gateway.java:255)</span>
-<span class="go">    at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:125)</span>
-<span class="go">    at py4j.commands.CallCommand.execute(CallCommand.java:81)</span>
-<span class="go">    at py4j.GatewayConnection.run(GatewayConnection.java:175)</span>
-<span class="go">    at java.lang.Thread.run(Thread.java:636)</span>
+<span class="x">java.lang.IndexOutOfBoundsException: Index: 0, Size: 0</span>
+<span class="x">    at java.util.LinkedList.entry(LinkedList.java:382)</span>
+<span class="x">    at java.util.LinkedList.remove(LinkedList.java:374)</span>
+<span class="x">    at py4j.examples.Stack.pop(Stack.java:42)</span>
+<span class="x">    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span>
+<span class="x">    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)</span>
+<span class="x">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span>
+<span class="x">    at java.lang.reflect.Method.invoke(Method.java:616)</span>
+<span class="x">    at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:119)</span>
+<span class="x">    at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:392)</span>
+<span class="x">    at py4j.Gateway.invoke(Gateway.java:255)</span>
+<span class="x">    at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:125)</span>
+<span class="x">    at py4j.commands.CallCommand.execute(CallCommand.java:81)</span>
+<span class="x">    at py4j.GatewayConnection.run(GatewayConnection.java:175)</span>
+<span class="x">    at java.lang.Thread.run(Thread.java:636)</span>
 </pre></div>
 </div>
 <p>You get a <a class="reference internal" href="py4j_java_protocol.html#py4j.protocol.Py4JJavaError" title="py4j.protocol.Py4JJavaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">Py4JJavaError</span></code></a> because there
@@ -320,7 +322,7 @@ exception that was thrown on the Java side and its stack trace. Read the
 raised by Py4J.</p>
 </section>
 <section id="collections-help-and-constructors">
-<h2><span class="section-number">2.3. </span>Collections, Help, and Constructors<a class="headerlink" href="#collections-help-and-constructors" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Collections, Help, and Constructors<a class="headerlink" href="#collections-help-and-constructors" title="Permalink to this heading">¶</a></h2>
 <p>Now, you will experiment with lists. Add another element and get the internal
 list of the stack:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s1">&#39;First item&#39;</span><span class="p">)</span>
@@ -373,9 +375,9 @@ not returned by the JVM:</p>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;py4j/java_gateway.py&quot;</span>, line <span class="m">158</span>, in <span class="n">__call__</span>
-    <span class="n">args_command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">get_command_part</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span>
+<span class="w">    </span><span class="n">args_command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">get_command_part</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span>
   File <span class="nb">&quot;py4j/java_gateway.py&quot;</span>, line <span class="m">68</span>, in <span class="n">get_command_part</span>
-    <span class="n">command_part</span> <span class="o">=</span> <span class="n">REFERENCE_TYPE</span> <span class="o">+</span> <span class="n">parameter</span><span class="o">.</span><span class="n">get_object_id</span><span class="p">()</span>
+<span class="w">    </span><span class="n">command_part</span> <span class="o">=</span> <span class="n">REFERENCE_TYPE</span> <span class="o">+</span> <span class="n">parameter</span><span class="o">.</span><span class="n">get_object_id</span><span class="p">()</span>
 <span class="gr">AttributeError</span>: <span class="n">&#39;list&#39; object has no attribute &#39;get_object_id&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">getInternalList</span><span class="p">()</span>
 <span class="go">[u&#39;Third item&#39;, u&#39;First item&#39;, u&#39;First item&#39;, u&#39;Second item&#39;]</span>
@@ -423,7 +425,7 @@ use the <code class="docutils literal notranslate"><span class="pre">jvm</span><
 </div>
 </section>
 <section id="where-to-go-from-here">
-<h2><span class="section-number">2.4. </span>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>You can read the <a class="reference internal" href="advanced_topics.html"><span class="doc">Advanced Topics</span></a> to learn more about
 collections, callbacks and the Py4J memory and threading model.</p></li>
@@ -476,7 +478,7 @@ Java API</span></a>.</p></li>
     </div>
     <div class="footer">
       &copy; Copyright 2009-2015, Barthélémy Dagenais.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.5.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
     </div>
   </div>
   </body>

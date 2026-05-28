@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Welcome to Py4J &mdash; Py4J</title>
     <link rel="stylesheet" href="_static/py4jdoc.css" type="text/css" />
@@ -21,7 +21,9 @@
     <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -94,7 +96,7 @@
           <div class="body">
             
   <section id="welcome-to-py4j">
-<h1>Welcome to Py4J<a class="headerlink" href="#welcome-to-py4j" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to Py4J<a class="headerlink" href="#welcome-to-py4j" title="Permalink to this heading">¶</a></h1>
 <p>Py4J enables Python programs running in a Python interpreter to dynamically
 access Java objects in a Java Virtual Machine. Methods are called as if the
 Java objects resided in the Python interpreter and Java collections can be
@@ -105,7 +107,7 @@ license</a>.</p>
 program creates a <cite>java.util.Random</cite> instance from a JVM and calls some of its
 methods. It also accesses a custom Java class, <cite>AdditionApplication</cite> to add the
 generated numbers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">py4j.java_gateway</span> <span class="kn">import</span> <span class="n">JavaGateway</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaGateway</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gateway</span> <span class="o">=</span> <span class="n">JavaGateway</span><span class="p">()</span>                   <span class="c1"># connect to the JVM</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">random</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Random</span><span class="p">()</span>   <span class="c1"># create a java.util.Random instance</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">number1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">nextInt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>              <span class="c1"># call the Random.nextInt method</span>
@@ -124,26 +126,26 @@ generated and no tool was required to run these programs). The
 previous code snippet. Note that the Java program must be started before
 executing the Python code above. In other words, the Py4J does not start a
 JVM.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">py4j.GatewayServer</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">py4j.GatewayServer</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AdditionApplication</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AdditionApplication</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addition</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addition</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">AdditionApplication</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdditionApplication</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// app is now the gateway.entry_point</span><span class="w"></span>
-<span class="w">    </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="n">app</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">server</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">AdditionApplication</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdditionApplication</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// app is now the gateway.entry_point</span>
+<span class="w">    </span><span class="n">GatewayServer</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GatewayServer</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
+<span class="w">    </span><span class="n">server</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="support-resources">
-<h1>Support &amp; Resources<a class="headerlink" href="#support-resources" title="Permalink to this headline">¶</a></h1>
+<h1>Support &amp; Resources<a class="headerlink" href="#support-resources" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><p>Take a look at the tutorial <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started with Py4J</span></a>.</p></li>
 <li><p>Browse the <a class="reference internal" href="contents.html"><span class="doc">Py4J Documentation</span></a> or the <a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a>.</p></li>
@@ -152,8 +154,12 @@ JVM.</p>
 </ul>
 </section>
 <section id="news">
-<h1>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h1>
+<h1>News<a class="headerlink" href="#news" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
+<li><p><strong>January 15th 2024</strong> - Py4J 0.10.9.9 has been released. See the
+<a class="reference internal" href="changelog.html"><span class="doc">Changelog</span></a> for more details about the bug fixes and new features.</p></li>
+<li><p><strong>December 17th 2024</strong> - Py4J 0.10.9.8 has been released. See the
+<a class="reference internal" href="changelog.html"><span class="doc">Changelog</span></a> for more details about the bug fixes and new features.</p></li>
 <li><p><strong>August 12th 2022</strong> - Py4J 0.10.9.7 has been released. See the
 <a class="reference internal" href="changelog.html"><span class="doc">Changelog</span></a> for more details about the bug fixes and new features.</p></li>
 <li><p><strong>August 11th 2022</strong> - Py4J 0.10.9.6 has been released. See the
@@ -254,7 +260,7 @@ available in the following weeks.</p></li>
     </div>
     <div class="footer">
       &copy; Copyright 2009-2015, Barthélémy Dagenais.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.5.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
     </div>
   </div>
   </body>
